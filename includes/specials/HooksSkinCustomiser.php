@@ -35,6 +35,7 @@ class SkinCustomiserHooks extends Hooks {
 		// 3. Customize skins
 		$skinname = $skin->getSkinName();
 		$out->addModuleStyles( 'ext.skincustomiser.common' );
+		$out->addModuleStyles( 'ext.skincustomiser.mobile' );
 		if ( self::isSupported( $skinname ) ) {
 			$out->addModuleStyles( 'ext.skincustomiser.' . $skinname );
 		} else {
