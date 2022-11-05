@@ -3,9 +3,10 @@
 		"authors": [ "WikiMANNia" ]
 	},
 	"skincustomiser-msg": "Customise Skins",
-	"skincustomiser-desc": "Customise existing skins. Add scripts and meta data in the header area. Add translated labels for the navigation bar.",
-	"about": "About your wiki",
+	"skincustomiser-desc": "Customise existing skins. Add scripts and meta data in the header area. Add translated labels for the [https://www.mediawiki.org/wiki/Sidebar sidebar].",
+	"projectabout": "About your wiki",
 	"projectpage": "Project page",
+	"projectpage-url": "//yourdomain.org",
 	"registrate": "Ask for account",
 	"contact": "Contact",
 	"interaction": "Interaction",
@@ -13,5 +14,6 @@
 	"portal-1": "Your personal portal 1",
 	"portal-2": "Your personal portal 2",
 	"portal-3": "Your personal portal 3",
+	"tourbus": "TourBusStop",
 	"createacct-benefit-heading": "{{SITENAME}} is made by individuals like you."
 }

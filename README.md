@@ -22,3 +22,17 @@ Installation instructions can be found at [MediaWiki](http://www.mediawiki.org/w
 
 * $wgHeadScriptName
 * $wgHeadScriptCode
+
+## Version history
+
+1.0.0
+
+* First public release
+
+1.1.0
+
+* Add Support for MediaWiki:Mobile.css
+
+1.2.0
+
+* Add Support for `fallback`, `minerva`, `timeless`, `vector-2022`

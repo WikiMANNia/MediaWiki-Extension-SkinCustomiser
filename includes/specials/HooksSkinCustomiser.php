@@ -23,7 +23,7 @@ class SkinCustomiserHooks extends Hooks {
 
 
 		// 2. Add skripts
-        global $wgHeadScriptCode, $wgHeadScriptName;
+		global $wgHeadScriptCode, $wgHeadScriptName;
 
 		if ( !empty( $wgHeadScriptCode ) && !empty( $wgHeadScriptName ) ) {
 			if ( ( $wgHeadScriptCode !== '<!-- No Head Script -->' ) && ( $wgHeadScriptName !== '<!-- No Script Name -->' ) ) {
@@ -38,7 +38,7 @@ class SkinCustomiserHooks extends Hooks {
 		$out->addModuleStyles( 'ext.skincustomiser.mobile' );
 		if ( self::isSupported( $skinname ) ) {
 			$out->addModuleStyles( 'ext.skincustomiser.' . $skinname );
-		} else {
+		} else if ( $skinname !== 'fallback' ) {
 			wfLogWarning( 'Skin ' . $skinname . ' not supported by SkinCustomiser.' . "\n" );
 		}
 	}
@@ -47,6 +47,6 @@ class SkinCustomiserHooks extends Hooks {
 
 		// 4. Add another supported skin here:
 		$mySkin = 'anotherskin';
-		return in_array( $skinname, [ 'cologneblue', 'modern', 'monobook', 'vector', $mySkin ] );
+		return in_array( $skinname, [ 'cologneblue', 'minerva', 'modern', 'monobook', 'timeless', 'vector', 'vector-2022', $mySkin ] );
 	}
 }
