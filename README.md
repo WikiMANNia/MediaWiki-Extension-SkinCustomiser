@@ -23,6 +23,36 @@ Installation instructions can be found at [MediaWiki](http://www.mediawiki.org/w
 * $wgHeadScriptName
 * $wgHeadScriptCode
 
+### Configure logo
+
+$wgLogos   = [ '1x' => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo.png" ];
+
+$wgFavicon = "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/favicon.ico";
+
+#### Skin `vector-2022`
+
+$wgLogos = [
+
+'1x' => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo.png",
+
+'icon' => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo-icon.svg",
+
+'wordmark' => [
+
+"src" => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo-wordmark.svg",
+
+"width" => 160, "height" => 24 ],
+
+'tagline' => [
+
+"src" => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo-tagline.svg",
+
+"width" => 160, "height" => 14 ]
+
+];
+
+$wgFavicon = "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/favicon.ico";
+
 ## Version history
 
 1.0.0
