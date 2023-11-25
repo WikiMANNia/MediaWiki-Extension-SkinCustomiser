@@ -29,11 +29,11 @@ Installation instructions can be found at [MediaWiki](http://www.mediawiki.org/w
 
 ### Add bottom data
 
-* $wgSkinCustomiserDisplayBottom = "<p>Something at the bottom of every page.</p>";
+* $wgSkinCustomiserDisplayBottom = "&lt;p>Something at the bottom of every page.&lt;/p>";
 
 ### Add scripts
 
-* $wgSkinCustomiserScripts = '<script type="text/javascript">Some script code here!</script>';
+* $wgSkinCustomiserScripts = '&lt;script type="text/javascript">Some script code here!&lt;/script>';
 
 ### Configure logo
 
@@ -78,3 +78,8 @@ $wgFavicon = "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/fav
 1.2.0
 
 * Add Support for `fallback`, `minerva`, `timeless`, `vector-2022`
+
+2.0.0
+
+* Refactoring
+* Adding features from extension [PCR GUI Inserts](https://www.mediawiki.org/wiki/Extension:PCR_GUI_Inserts)
