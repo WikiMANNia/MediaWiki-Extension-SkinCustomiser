@@ -5,14 +5,6 @@ The maintenance of the MediaWiki extension [SkinCustomiser](https://www.mediawik
 
 El mantenimiento de la extensión de MediaWiki [SkinCustomiser](https://www.mediawiki.org/wiki/Extension:SkinCustomiser) está gestionado por WikiMANNia.
 
-## MediaWiki
-
-MediaWiki ist männerfeindlich, siehe [T323956](https://phabricator.wikimedia.org/T323956).
-
-MediaWiki is hostile to Men, see [T323956](https://phabricator.wikimedia.org/T323956).
-
-MediaWiki es hostil a los hombres, véase [T323956](https://phabricator.wikimedia.org/T323956).
-
 ## Description
 
 Customises existing MediaWiki skins. Add scripts and meta data in the header area. Add translated labels to the sidebar.
@@ -21,15 +13,27 @@ Installation instructions can be found at [MediaWiki](http://www.mediawiki.org/w
 
 ## Configuration
 
+### Add head data
+
+* $wgSkinCustomiserHeadItems = [
+		[ "key1", "content1" ],
+		[ "key2", "content2" ]
+	];
+
 ### Add meta data
 
-* $wgHeadMetaName
-* $wgHeadMetaCode
+* $wgSkinCustomiserMetaItems = [
+		[ "name1", "content1" ]
+		[ "name2", "content2" ],
+	];
 
-### Add skripts
+### Add bottom data
 
-* $wgHeadScriptName
-* $wgHeadScriptCode
+* $wgSkinCustomiserDisplayBottom = "<p>Something at the bottom of every page.</p>";
+
+### Add scripts
+
+* $wgSkinCustomiserScripts = '<script type="text/javascript">Some script code here!</script>';
 
 ### Configure logo
 
