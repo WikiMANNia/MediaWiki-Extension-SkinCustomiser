@@ -6,20 +6,43 @@
 	"version": "2.0.0",
 	"namemsg": "skincustomiser-msg",
 	"descriptionmsg": "skincustomiser-desc",
-	"manifest_version": 1,
+	"manifest_version": 2,
 	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
 	"config": {
-		"SkinCustomiserHeadItems": [],
-		"SkinCustomiserMetaItems": [],
-		"SkinCustomiserDisplayBottom": "",
-		"SkinCustomiserScripts": ""
+		"SkinCustomiserHeadItems": {
+			"type": "array",
+			"value": []
+			},
+		"SkinCustomiserMetaItems": {
+			"type": "array",
+			"value": []
+			},
+		"SkinCustomiserDisplayBottom": {
+			"type": "string",
+			"value": ""
+			},
+		"SkinCustomiserScripts": {
+			"type": "string",
+			"value": ""
+		}
 	},
 	"AutoloadClasses": {
-		"SkinCustomiserHooks": "includes/Hooks.php"
+		"MediaWiki\\Extension\\SkinCustomiser\\Hooks": "includes/Hooks.php"
 	},
 	"Hooks": {
-		"BeforePageDisplay": "SkinCustomiserHooks::onBeforePageDisplay",
-		"SkinAfterBottomScripts": "SkinCustomiserHooks::onSkinAfterBottomScripts"
+		"BeforePageDisplay": "main",
+		"SkinAfterBottomScripts": "main"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "MediaWiki\\Extension\\SkinCustomiser\\Hooks",
+			"services": [
+				"MainConfig"
+			]
+		}
 	},
 	"MessagesDirs": {
 		"SkinCustomiser": [ "i18n" ]

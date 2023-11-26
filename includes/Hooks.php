@@ -10,6 +10,15 @@
  * @ingroup Extensions
  */
 
+namespace MediaWiki\Extension\SkinCustomiser;
+
+use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Hook\SkinAfterBottomScriptsHook;
+
+use GlobalVarConfig;
+use OutputPage;
+use Skin;
+
 /**
  * PHPMD will warn us about these things here but since they're hooks,
  * we really don't have much choice.
@@ -20,7 +29,21 @@
  *
  * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
  */
-class SkinCustomiserHooks extends Hooks {
+class Hooks implements
+	BeforePageDisplayHook,
+	SkinAfterBottomScriptsHook
+{
+
+	private GlobalVarConfig $config;
+
+	/**
+	 * @param GlobalVarConfig $config
+	 */
+	public function __construct(
+		GlobalVarConfig $config
+	) {
+		$this->config = $config;
+	}
 
 	/**
 	 * https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
@@ -29,46 +52,36 @@ class SkinCustomiserHooks extends Hooks {
 	 * @param Skin $skin
 	 * @return void This hook must not abort, it must return no value
 	 */
-	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
+	public function onBeforePageDisplay( $out, $skin ): void {
 
-		// 1. Add head data
-		global $wgSkinCustomiserHeadItems;
+		$_array = $this->config->get( "SkinCustomiserHeadItems" );
+		if ( is_array( $_array ) && ( count( $_array ) > 0 ) ) {
 
-		if ( is_array( $wgSkinCustomiserHeadItems ) && ( count( $wgSkinCustomiserHeadItems ) > 0 ) ) {
-
-			foreach ( $wgSkinCustomiserHeadItems as $value ) {
+			foreach ( $_array as $value ) {
 				$out->addHeadItem( $value[0], $value[1] );
 			}
 		}
 
+		$_array = $this->config->get( "SkinCustomiserMetaItems" );
+		if ( is_array( $_array ) && ( count( $_array ) > 0 ) ) {
 
-		// 2. Add meta data
-		global $wgSkinCustomiserMetaItems;
-
-		if ( is_array( $wgSkinCustomiserMetaItems ) && ( count( $wgSkinCustomiserMetaItems ) > 0 ) ) {
-
-			foreach ( $wgSkinCustomiserMetaItems as $value ) {
+			foreach ( $_array as $value ) {
 				$out->addMeta( $value[0], $value[1] );
 			}
 		}
 
-
-		// 3. Add scripts
-		global $wgSkinCustomiserDisplayBottom;
-
-		if ( !empty( $wgSkinCustomiserDisplayBottom ) ) {
-			$out->addHTML( $wgSkinCustomiserDisplayBottom );
+		$_string = $this->config->get( "SkinCustomiserDisplayBottom" );
+		if ( !empty( $_string ) ) {
+			$out->addHTML( $_string );
 		}
 
-
-		// 4. Customize skins
 		$skinname = $skin->getSkinName();
 		$out->addModuleStyles( 'ext.skincustomiser.common' );
 		$out->addModuleStyles( 'ext.skincustomiser.mobile' );
 		if ( self::isSupported( $skinname ) ) {
 			$out->addModuleStyles( 'ext.skincustomiser.' . $skinname );
 		} else if ( $skinname !== 'fallback' ) {
-			wfLogWarning( 'Skin ' . $skinname . ' not supported by SkinCustomiser.' . "\n" );
+			wfLogWarning( "Skin $skinname not supported by SkinCustomiser.\n" );
 		}
 	}
 
@@ -80,18 +93,16 @@ class SkinCustomiserHooks extends Hooks {
 	 *   the stock bottom scripts.
 	 * @return bool|void True or no return value to continue or false to abort
 	 */
-	public static function onSkinAfterBottomScripts( $skin, &$text ) {
+	public function onSkinAfterBottomScripts( $skin, &$text ) {
 
-		global $wgSkinCustomiserScripts;
-
-		if ( !empty( $wgSkinCustomiserScripts ) ) {
-			$text .= $wgSkinCustomiserScripts;
+		$_string = $this->config->get( "SkinCustomiserScripts" );
+		if ( !empty( $_string ) ) {
+			$text .= $_string;
 		}
 	}
 
 	private static function isSupported( $skinname ) {
 
-		// 4. Add another supported skin here:
 		$mySkin = 'anotherskin';
 		return in_array( $skinname, [ 'cologneblue', 'minerva', 'modern', 'monobook', 'timeless', 'vector', 'vector-2022', $mySkin ] );
 	}
