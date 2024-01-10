@@ -2,6 +2,8 @@
 	"@metadata": {
 		"authors": [ "WikiMANNia" ]
 	},
-	"refreshsitestatstable-name": "{{name}}",
-	"refreshsitestatstable-desc": "{{desc|name=RefreshSiteStatsTable|url=https://www.mediawiki.org/wiki/Extension:RefreshSiteStatsTable}}"
+	"skincustomiser-msg": "SkinCustomiser",
+	"skincustomiser-desc": "{{desc|name=SkinCustomiser|url=https://www.mediawiki.org/wiki/Extension:SkinCustomiser}}",
+	"projectpage": "Title of the link to the project page",
+	"projectpage-url": "URL to the project page"
 }

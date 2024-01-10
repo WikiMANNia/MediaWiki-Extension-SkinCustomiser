@@ -1,18 +1,69 @@
-# MediaWiki RefreshSiteStatsTable
+# SkinCustomiser
+Die Pflege der MediaWiki-Erweiterung [SkinCustomiser](https://www.mediawiki.org/wiki/Extension:SkinCustomiser) wird von WikiMANNia verwaltet.
 
-Die Pflege der MediaWiki-Erweiterung [RefreshSiteStatsTable](https://www.mediawiki.org/wiki/Extension:RefreshSiteStatsTable/de) wird von WikiMANNia verwaltet.
+The maintenance of the MediaWiki extension [SkinCustomiser](https://www.mediawiki.org/wiki/Extension:SkinCustomiser) is managed by WikiMANNia.
 
-The maintenance of the MediaWiki extension [RefreshSiteStatsTable](https://www.mediawiki.org/wiki/Extension:RefreshSiteStatsTable) is managed by WikiMANNia.
-
-El mantenimiento de la extensión de MediaWiki [RefreshSiteStatsTable](https://www.mediawiki.org/wiki/Extension:RefreshSiteStatsTable/es) está gestionado por WikiMANNia.
+El mantenimiento de la extensión de MediaWiki [SkinCustomiser](https://www.mediawiki.org/wiki/Extension:SkinCustomiser) está gestionado por WikiMANNia.
 
 ## Description
 
-Refreshes the value of the fields `ss_good_articles`, `ss_total_pages`, and `ss_users` in the table “[site_stats](https://www.mediawiki.org/wiki/Manual:Site_stats_table)”.
+Customises existing MediaWiki skins. Add scripts and meta data in the header area. Add translated labels to the sidebar.
 
-## Compatibility
+Installation instructions can be found at [MediaWiki](http://www.mediawiki.org/wiki/Extension:SkinCustomiser).
 
-This extension works from REL1_25 and has been tested up to MediaWiki version `1.41.0`.
+## Configuration
+
+### Add head data
+
+* $wgSkinCustomiserHeadItems = [
+		[ "key1", "content1" ],
+		[ "key2", "content2" ]
+	];
+
+### Add meta data
+
+* $wgSkinCustomiserMetaItems = [
+		[ "name1", "content1" ]
+		[ "name2", "content2" ],
+	];
+
+### Add bottom data
+
+* $wgSkinCustomiserDisplayBottom = "&lt;p>Something at the bottom of every page.&lt;/p>";
+
+### Add scripts
+
+* $wgSkinCustomiserScripts = '&lt;script type="text/javascript">Some script code here!&lt;/script>';
+
+### Configure logo
+
+$wgLogos   = [ '1x' => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo.png" ];
+
+$wgFavicon = "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/favicon.ico";
+
+#### Skin `vector-2022`
+
+$wgLogos = [
+
+'1x' => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo.png",
+
+'icon' => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo-icon.svg",
+
+'wordmark' => [
+
+"src" => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo-wordmark.svg",
+
+"width" => 160, "height" => 24 ],
+
+'tagline' => [
+
+"src" => "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/logo-tagline.svg",
+
+"width" => 160, "height" => 14 ]
+
+];
+
+$wgFavicon = "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/favicon.ico";
 
 ## Version history
 
@@ -22,20 +73,13 @@ This extension works from REL1_25 and has been tested up to MediaWiki version `1
 
 1.1.0
 
-* Refactoring.
-
-1.1.1
-
-* backward compatibility to MediaWiki v1.25 and v1.26
-
-1.1.2
-
-* Add a return link
+* Add Support for MediaWiki:Mobile.css
 
 1.2.0
 
-* Added compatibility to MediaWiki v1.38.
+* Add Support for `fallback`, `minerva`, `timeless`, `vector-2022`
 
-1.3.0
+2.0.0
 
-* Added compatibility to MediaWiki v1.41.
+* Refactoring
+* Adding features from extension [PCR GUI Inserts](https://www.mediawiki.org/wiki/Extension:PCR_GUI_Inserts)

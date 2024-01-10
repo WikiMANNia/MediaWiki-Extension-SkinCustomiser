@@ -1,27 +1,86 @@
 {
-	"name": "RefreshSiteStatsTable",
-	"namemsg": "refreshsitestatstable-name",
-	"version": "1.3.0",
-	"author": [
-		"[//wikimannia.org WikiMANNia]"
-	],
-	"url": "https://github.com/WikiMANNia/Mediawiki-Extension-RefreshSiteStatsTable",
-	"descriptionmsg": "refreshsitestatstable-desc",
-	"type": "specialpage",
-	"license-name": "GPL-3.0-or-later",
-	"MessagesDirs": {
-		"RefreshSiteStatsTable": [
-			"i18n"
-		]
+	"name": "SkinCustomiser",
+	"author": "[https://wikimannia.org WikiMANNia]",
+	"url": "https://www.mediawiki.org/wiki/Extension:SkinCustomiser",
+	"license-name": "GPL-2.0-or-later",
+	"version": "2.0.0",
+	"namemsg": "skincustomiser-msg",
+	"descriptionmsg": "skincustomiser-desc",
+	"manifest_version": 2,
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
 	},
-	"ExtensionMessagesFiles": {
-		"RefreshSiteStatsTableAlias": "RefreshSiteStatsTable.i18n.alias.php"
-	},
-	"SpecialPages": {
-		"RefreshSiteStatsTable": "MediaWiki\\Extension\\RefreshSiteStatsTable\\SpecialRefreshSiteStatsTable"
+	"config": {
+		"SkinCustomiserHeadItems": {
+			"type": "array",
+			"value": []
+			},
+		"SkinCustomiserMetaItems": {
+			"type": "array",
+			"value": []
+			},
+		"SkinCustomiserDisplayBottom": {
+			"type": "string",
+			"value": ""
+			},
+		"SkinCustomiserScripts": {
+			"type": "string",
+			"value": ""
+		}
 	},
 	"AutoloadClasses": {
-		"MediaWiki\\Extension\\RefreshSiteStatsTable\\SpecialRefreshSiteStatsTable": "includes/SpecialRefreshSiteStatsTable.php"
+		"MediaWiki\\Extension\\SkinCustomiser\\Hooks": "includes/Hooks.php"
 	},
-	"manifest_version": 1
+	"Hooks": {
+		"BeforePageDisplay": "main",
+		"SkinAfterBottomScripts": "main"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "MediaWiki\\Extension\\SkinCustomiser\\Hooks",
+			"services": [
+				"MainConfig"
+			]
+		}
+	},
+	"MessagesDirs": {
+		"SkinCustomiser": [ "i18n" ]
+	},
+	"ResourceModules": {
+		"ext.skincustomiser.common": {
+			"styles": "css/Common.css"
+		},
+		"ext.skincustomiser.mobile": {
+			"styles": "css/Mobile.css"
+		},
+		"ext.skincustomiser.cologneblue": {
+			"styles": "css/Cologneblue.css"
+		},
+		"ext.skincustomiser.minerva": {
+			"styles": "css/Minerva.css"
+		},
+		"ext.skincustomiser.modern": {
+			"styles": "css/Modern.css"
+		},
+		"ext.skincustomiser.monobook": {
+			"styles": "css/Monobook.css"
+		},
+		"ext.skincustomiser.timeless": {
+			"styles": "css/Timeless.css"
+		},
+		"ext.skincustomiser.vector": {
+			"styles": "css/Vector.css"
+		},
+		"ext.skincustomiser.vector-2022": {
+			"styles": "css/Vector-2022.css"
+		},
+		"ext.skincustomiser.anotherskin": {
+			"styles": "css/AnotherSkin.css"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "SkinCustomiser/resources"
+	}
 }
