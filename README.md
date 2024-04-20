@@ -83,3 +83,7 @@ $wgFavicon = "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/fav
 
 * Refactoring
 * Adding features from extension [PCR GUI Inserts](https://www.mediawiki.org/wiki/Extension:PCR_GUI_Inserts)
+
+2.1.0
+
+* Support added for Skin Support added for Skin [Monaco](https://www.mediawiki.org/wiki/Skin:Monaco)..
