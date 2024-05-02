@@ -79,7 +79,9 @@ class Hooks implements
 		$out->addModuleStyles( 'ext.skincustomiser.common' );
 		$out->addModuleStyles( 'ext.skincustomiser.mobile' );
 		if ( self::isSupported( $skinname ) ) {
-			$out->addModuleStyles( 'ext.skincustomiser.' . $skinname );
+			if ( $skinname !== 'monaco' ) {
+				$out->addModuleStyles( 'ext.skincustomiser.' . $skinname );
+			}
 		} else if ( $skinname !== 'fallback' ) {
 			wfLogWarning( "Skin $skinname not supported by SkinCustomiser.\n" );
 		}
