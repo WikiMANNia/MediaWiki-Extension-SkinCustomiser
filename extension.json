@@ -3,7 +3,7 @@
 	"author": "[https://wikimannia.org WikiMANNia]",
 	"url": "https://www.mediawiki.org/wiki/Extension:SkinCustomiser",
 	"license-name": "GPL-2.0-or-later",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"namemsg": "skincustomiser-msg",
 	"descriptionmsg": "skincustomiser-desc",
 	"manifest_version": 2,
@@ -53,6 +53,9 @@
 		},
 		"ext.skincustomiser.mobile": {
 			"styles": "css/Mobile.css"
+		},
+		"ext.skincustomiser.citizen": {
+			"styles": "css/Citizen.css"
 		},
 		"ext.skincustomiser.cologneblue": {
 			"styles": "css/Cologneblue.css"

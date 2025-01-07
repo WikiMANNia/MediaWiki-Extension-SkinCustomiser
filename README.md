@@ -87,3 +87,7 @@ $wgFavicon = "$wgResourceBasePath/extensions/SkinCustomiser/resources/images/fav
 2.0.1
 
 * Support added for Skin [Monaco](https://www.mediawiki.org/wiki/Skin:Monaco).
+
+2.0.2
+
+* Support added for Skin [Citizen](https://www.mediawiki.org/wiki/Skin:Citizen).

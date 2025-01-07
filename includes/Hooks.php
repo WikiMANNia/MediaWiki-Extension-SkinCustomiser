@@ -106,6 +106,6 @@ class Hooks implements
 	private static function isSupported( $skinname ) {
 
 		$mySkin = 'anotherskin';
-		return in_array( $skinname, [ 'cologneblue', 'minerva', 'modern', 'monaco', 'monobook', 'timeless', 'vector', 'vector-2022', $mySkin ] );
+		return in_array( $skinname, [ 'citizen', 'cologneblue', 'minerva', 'modern', 'monaco', 'monobook', 'timeless', 'vector', 'vector-2022', $mySkin ] );
 	}
 }
