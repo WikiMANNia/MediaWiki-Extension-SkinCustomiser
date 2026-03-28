@@ -91,3 +91,11 @@ $wgFavicon = "$wgScriptPath/extensions/SkinCustomiser/resources/images/favicon.i
 2.0.2
 
 * Support added for Skin [Citizen](https://www.mediawiki.org/wiki/Skin:Citizen).
+
+2.0.3
+
+* Add Support for REL1_44
+
+2.1.0
+
+* Refactoring classes, namespace and backward compatibility.

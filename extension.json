@@ -3,7 +3,7 @@
 	"author": "[https://wikimannia.org WikiMANNia]",
 	"url": "https://www.mediawiki.org/wiki/Extension:SkinCustomiser",
 	"license-name": "GPL-2.0-or-later",
-	"version": "2.0.2",
+	"version": "2.1.0",
 	"namemsg": "skincustomiser-msg",
 	"descriptionmsg": "skincustomiser-desc",
 	"manifest_version": 2,
@@ -29,20 +29,18 @@
 			"value": ""
 		}
 	},
-	"AutoloadClasses": {
-		"MediaWiki\\Extension\\SkinCustomiser\\Hooks": "includes/Hooks.php"
-	},
-	"Hooks": {
-		"BeforePageDisplay": "main",
-		"SkinAfterBottomScripts": "main"
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\SkinCustomiser\\": "includes/"
 	},
 	"HookHandlers": {
 		"main": {
 			"class": "MediaWiki\\Extension\\SkinCustomiser\\Hooks",
-			"services": [
-				"MainConfig"
-			]
+			"services": [ "MainConfig" ]
 		}
+	},
+	"Hooks": {
+		"BeforePageDisplay": "main",
+		"SkinAfterBottomScripts": "main"
 	},
 	"MessagesDirs": {
 		"SkinCustomiser": [ "i18n" ]

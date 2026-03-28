@@ -15,9 +15,21 @@ namespace MediaWiki\Extension\SkinCustomiser;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\SkinAfterBottomScriptsHook;
 
-use GlobalVarConfig;
-use OutputPage;
-use Skin;
+use MediaWiki\Config\Config;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Skin\Skin;
+
+// Class aliases for multi-version compatibility.
+// These need to be in global scope so phan can pick up on them,
+// and before any use statements that make use of the namespaced names.
+if ( version_compare( MW_VERSION, '1.41', '<' ) ) {
+	if ( !class_exists('MediaWiki\Config\Config') )  class_alias( '\Config', '\MediaWiki\Config\Config' );
+	if ( !class_exists('MediaWiki\Output\OutputPage') )  class_alias( '\OutputPage', '\MediaWiki\Output\OutputPage' );
+}
+
+if ( version_compare( MW_VERSION, '1.44', '<' ) ) {
+	if ( !class_exists('MediaWiki\Skin\Skin') )  class_alias( '\Skin', '\MediaWiki\Skin\Skin' );
+}
 
 /**
  * PHPMD will warn us about these things here but since they're hooks,
@@ -34,13 +46,13 @@ class Hooks implements
 	SkinAfterBottomScriptsHook
 {
 
-	private GlobalVarConfig $config;
+	private Config $config;
 
 	/**
 	 * @param GlobalVarConfig $config
 	 */
 	public function __construct(
-		GlobalVarConfig $config
+		Config $config
 	) {
 		$this->config = $config;
 	}
@@ -75,15 +87,15 @@ class Hooks implements
 			$out->addHTML( $_string );
 		}
 
-		$skinname = $skin->getSkinName();
+		$skinName = $skin->getSkinName();
 		$out->addModuleStyles( 'ext.skincustomiser.common' );
 		$out->addModuleStyles( 'ext.skincustomiser.mobile' );
-		if ( self::isSupported( $skinname ) ) {
-			if ( $skinname !== 'monaco' ) {
-				$out->addModuleStyles( 'ext.skincustomiser.' . $skinname );
+		if ( self::isSupported( $skinName ) ) {
+			if ( $skinName !== 'monaco' ) {
+				$out->addModuleStyles( 'ext.skincustomiser.' . $skinName );
 			}
-		} else if ( $skinname !== 'fallback' ) {
-			wfLogWarning( "Skin $skinname not supported by SkinCustomiser.\n" );
+		} else if ( ( $skinName !== 'apioutput' ) AND ( $skinName !== 'fallback' ) ) {
+			wfLogWarning( "Skin $skinName not supported by SkinCustomiser.\n" );
 		}
 	}
 
@@ -103,9 +115,9 @@ class Hooks implements
 		}
 	}
 
-	private static function isSupported( $skinname ) {
+	private static function isSupported( string $skinName ): bool {
 
 		$mySkin = 'anotherskin';
-		return in_array( $skinname, [ 'citizen', 'cologneblue', 'minerva', 'modern', 'monaco', 'monobook', 'timeless', 'vector', 'vector-2022', $mySkin ] );
+		return in_array( $skinName, [ 'citizen', 'cologneblue', 'minerva', 'modern', 'monaco', 'monobook', 'timeless', 'vector', 'vector-2022', $mySkin ] );
 	}
 }
