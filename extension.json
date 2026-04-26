@@ -35,7 +35,9 @@
 	"HookHandlers": {
 		"main": {
 			"class": "MediaWiki\\Extension\\SkinCustomiser\\Hooks",
-			"services": [ "MainConfig" ]
+			"services": [
+				"MainConfig"
+			]
 		}
 	},
 	"Hooks": {

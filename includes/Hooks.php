@@ -15,21 +15,21 @@ namespace MediaWiki\Extension\SkinCustomiser;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\SkinAfterBottomScriptsHook;
 
-use MediaWiki\Config\Config;
-use MediaWiki\Output\OutputPage;
-use MediaWiki\Skin\Skin;
-
 // Class aliases for multi-version compatibility.
 // These need to be in global scope so phan can pick up on them,
 // and before any use statements that make use of the namespaced names.
 if ( version_compare( MW_VERSION, '1.41', '<' ) ) {
-	if ( !class_exists('MediaWiki\Config\Config') )  class_alias( '\Config', '\MediaWiki\Config\Config' );
-	if ( !class_exists('MediaWiki\Output\OutputPage') )  class_alias( '\OutputPage', '\MediaWiki\Output\OutputPage' );
+	class_exists( 'MediaWiki\Config\Config' ) or class_alias( '\Config', '\MediaWiki\Config\Config' );
+	class_exists( 'MediaWiki\Output\OutputPage' ) or class_alias( '\OutputPage', '\MediaWiki\Output\OutputPage' );
 }
 
 if ( version_compare( MW_VERSION, '1.44', '<' ) ) {
-	if ( !class_exists('MediaWiki\Skin\Skin') )  class_alias( '\Skin', '\MediaWiki\Skin\Skin' );
+	class_exists( 'MediaWiki\Skin\Skin' ) or class_alias( '\Skin', '\MediaWiki\Skin\Skin' );
 }
+
+use MediaWiki\Config\Config;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Skin\Skin;
 
 /**
  * PHPMD will warn us about these things here but since they're hooks,
@@ -69,16 +69,16 @@ class Hooks implements
 		$_array = $this->config->get( "SkinCustomiserHeadItems" );
 		if ( is_array( $_array ) && ( count( $_array ) > 0 ) ) {
 
-			foreach ( $_array as $value ) {
-				$out->addHeadItem( $value[0], $value[1] );
+			foreach ( $_array as $key => $value ) {
+				$out->addHeadItem( $key, $value );
 			}
 		}
 
 		$_array = $this->config->get( "SkinCustomiserMetaItems" );
 		if ( is_array( $_array ) && ( count( $_array ) > 0 ) ) {
 
-			foreach ( $_array as $value ) {
-				$out->addMeta( $value[0], $value[1] );
+			foreach ( $_array as $key => $value ) {
+				$out->addMeta( $key, $value );
 			}
 		}
 
@@ -87,15 +87,15 @@ class Hooks implements
 			$out->addHTML( $_string );
 		}
 
-		$skinName = $skin->getSkinName();
+		$skinname = $skin->getSkinName();
 		$out->addModuleStyles( 'ext.skincustomiser.common' );
 		$out->addModuleStyles( 'ext.skincustomiser.mobile' );
-		if ( self::isSupported( $skinName ) ) {
-			if ( $skinName !== 'monaco' ) {
-				$out->addModuleStyles( 'ext.skincustomiser.' . $skinName );
+		if ( self::isSupported( $skinname ) ) {
+			if ( $skinname !== 'monaco' ) {
+				$out->addModuleStyles( 'ext.skincustomiser.' . $skinname );
 			}
-		} else if ( ( $skinName !== 'apioutput' ) AND ( $skinName !== 'fallback' ) ) {
-			wfLogWarning( "Skin $skinName not supported by SkinCustomiser.\n" );
+		} else if ( ( $skinname !== 'apioutput' ) AND ( $skinname !== 'fallback' ) ) {
+			wfLogWarning( "Skin $skinname not supported by SkinCustomiser.\n" );
 		}
 	}
 
