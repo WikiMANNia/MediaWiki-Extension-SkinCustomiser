@@ -15,18 +15,6 @@ namespace MediaWiki\Extension\SkinCustomiser;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\SkinAfterBottomScriptsHook;
 
-// Class aliases for multi-version compatibility.
-// These need to be in global scope so phan can pick up on them,
-// and before any use statements that make use of the namespaced names.
-if ( version_compare( MW_VERSION, '1.41', '<' ) ) {
-	class_exists( 'MediaWiki\Config\Config' ) or class_alias( '\Config', '\MediaWiki\Config\Config' );
-	class_exists( 'MediaWiki\Output\OutputPage' ) or class_alias( '\OutputPage', '\MediaWiki\Output\OutputPage' );
-}
-
-if ( version_compare( MW_VERSION, '1.44', '<' ) ) {
-	class_exists( 'MediaWiki\Skin\Skin' ) or class_alias( '\Skin', '\MediaWiki\Skin\Skin' );
-}
-
 use MediaWiki\Config\Config;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Skin\Skin;
@@ -57,6 +45,10 @@ class Hooks implements
 		$this->config = $config;
 	}
 
+    public static function onRegistration() {
+        Compat::init();
+    }
+
 	/**
 	 * https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
 	 *
@@ -69,16 +61,16 @@ class Hooks implements
 		$_array = $this->config->get( "SkinCustomiserHeadItems" );
 		if ( is_array( $_array ) && ( count( $_array ) > 0 ) ) {
 
-			foreach ( $_array as $key => $value ) {
-				$out->addHeadItem( $key, $value );
+			foreach ( $_array as $value ) {
+				$out->addHeadItem( $value[0], $value[1] );
 			}
 		}
 
 		$_array = $this->config->get( "SkinCustomiserMetaItems" );
 		if ( is_array( $_array ) && ( count( $_array ) > 0 ) ) {
 
-			foreach ( $_array as $key => $value ) {
-				$out->addMeta( $key, $value );
+			foreach ( $_array as $value ) {
+				$out->addMeta( $value[0], $value[1] );
 			}
 		}
 
